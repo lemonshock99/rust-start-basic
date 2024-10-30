@@ -3,7 +3,14 @@
 #![allow(while_true)]
 
 use std::collections::HashMap;
-use hello_world::Person;
+// use hello_world::Person;
+////////////
+// use hello_world::person::Person;
+// use hello_world::customer::Customer;
+use hello_world::{
+    customer::Customer,
+    person::Person
+};
 
 fn main() {
     //variavles 
