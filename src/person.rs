@@ -1,5 +1,6 @@
 
 
+use crate::speaking::Speaking;
 pub struct Person {
     name: String,
     age: u8,
@@ -22,3 +23,8 @@ impl Person {
     }
 }
 
+impl Speaking for Person {
+    fn speak(&self) {
+        println!("{} Speaking.... ", self.name)
+    }
+}

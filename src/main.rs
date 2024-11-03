@@ -9,7 +9,8 @@ use std::collections::HashMap;
 // use hello_world::customer::Customer;
 use hello_world::{
     customer::Customer,
-    person::Person
+    person::Person,
+    speaking::Speaking
 };
 
 fn main() {
@@ -144,7 +145,32 @@ fn main() {
     let p = Person::new("Bond".to_string(), 18);
     p.hello();
 
+    //Traits
+    p.speak();
 
+    //Enum
+    let x: Colors = Colors::Red;
+    match x {
+        Colors::Red => println!("red"),
+        Colors::Green => println!("green"),
+        _ => println!("blue"),
+    }
+
+    //////// 
+    let mut color= "";
+    match x {
+        Colors::Red => color = "red",
+        Colors::Green => color = "green",
+        _ => color = "blue",
+    }
+    println!("{}",color)
+
+}
+
+enum Colors {
+    Red,
+    Green,
+    Blue,
 }
 
 fn get_number() -> i32 {
