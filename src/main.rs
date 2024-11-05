@@ -149,7 +149,9 @@ fn main() {
     p.speak();
 
     //Enum
-    let x: Colors = Colors::Red;
+    let x: Colors = Colors::Blue;
+
+
     match x {
         Colors::Red => println!("red"),
         Colors::Green => println!("green"),
@@ -163,8 +165,41 @@ fn main() {
         Colors::Green => color = "green",
         _ => color = "blue",
     }
-    println!("{}",color)
+    println!("enum basic type 2 {}",color);
 
+    /////
+    let color2 = match x {
+        Colors::Red => "red",
+        Colors::Green => "green",
+        Colors::Blue => "blue",
+    };
+    println!("enum basic type 3 {}",color2);
+    
+    let x = check_grade(-1);
+    match x {
+        GradeResult::Error(e) => println!("{}", e),
+        GradeResult::Value(grade) => println!("{}", grade),
+    }
+
+    let x = check_grade(80);
+    match x {
+        GradeResult::Error(e) => println!("{}", e),
+        GradeResult::Value(grade) => println!("{}", grade),
+    }
+
+}
+
+
+fn check_grade(score: i32) -> GradeResult {
+    if score < 0 || score > 100 {
+        return GradeResult::Error("Score is not collect".to_string());
+    }
+    return GradeResult::Value("your grade is A".to_string());
+}
+
+enum GradeResult {
+    Value(String),
+    Error(String),
 }
 
 enum Colors {
