@@ -10,7 +10,8 @@ use std::collections::HashMap;
 use hello_world::{
     customer::Customer,
     person::Person,
-    speaking::Speaking
+    speaking::Speaking,
+    genpassword::gen_password,
 };
 
 fn main() {
@@ -133,6 +134,10 @@ fn main() {
 
     println!("{:#?}",x);
 
+
+    //Example call function in module
+    gen_password();
+
     //Hashmap
     let mut x: HashMap<&str, &str> = HashMap::new();
     x.insert("TH","Thailand");
@@ -187,14 +192,100 @@ fn main() {
         GradeResult::Value(grade) => println!("{}", grade),
     }
 
+    // Enum default in Rust Option
+    let x = check_grade2(-1);
+    match x {
+        None => println!("Error"),
+        Some(v) => println!("{}", v) ,
+    }
+
+
+    // Enum default in Rust Result
+
+    let x = check_grade3(109);
+    match x {
+        Err(e) => println!("{}", e),
+        Ok(v) => println!("{}", v) ,
+    }
+
+    // if Result sure not Error you can
+    // ------- 01 
+    let x = check_grade3(100);
+    if x.is_err() {
+        return;
+    }
+    let y = x.unwrap();
+
+    // ------- 02
+    let x = check_grade3(100);
+    if let Ok(v) = x {
+        println!("{}", v)
+    }
+    
+    // ------- 03
+    let x = check_grade3(100);
+    let y = match x {
+        Err(e) => {
+            println!("{}",e);
+            return;
+        }
+        Ok(v) => v,
+    };
+
+
+    // CLosures ---------- Annonymous Function
+    let x = |a,b| a + b;
+    let y = x(10, 20);
+    println!("Closures Demo a+b = {}", y);
+
+    // How to mix closures with function
+    let y = cal(10, 20, x);
+    println!("Function with Closures 1 {}", y);
+
+    let y = cal(10, 20, |a,b| a + b);
+    println!("Function with Closures 2 {}", y);
+
+    let y = cal(10, 20, add);
+    println!("Function with Closures 3 {}", y);    
+
 }
 
+
+fn cal<F: Fn(i32, i32) -> i32> (a: i32, b: i32, f:F) -> i32 {
+    f(a,b)
+}
+
+fn cal2<F> (a: i32, b: i32, f:F) -> i32 
+where 
+    F: Fn(i32, i32) -> i32,
+{
+    f(a,b)
+}
+
+fn add(a:i32, b:i32) -> i32 {
+    a + b
+}
 
 fn check_grade(score: i32) -> GradeResult {
     if score < 0 || score > 100 {
         return GradeResult::Error("Score is not collect".to_string());
     }
     return GradeResult::Value("your grade is A".to_string());
+}
+
+fn check_grade2(score: i32) -> Option<String> {
+    if score < 0 || score > 100 {
+        return None;
+    }
+    return Some("A".to_string());
+}
+
+
+fn check_grade3(score: i32) -> Result<String, String> {
+    if score < 0 || score > 100 {
+        return Err("Score is not correct".to_string());
+    }
+    Ok("A".to_string())
 }
 
 enum GradeResult {
