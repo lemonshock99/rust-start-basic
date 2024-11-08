@@ -3,7 +3,7 @@ pub mod person;
 pub mod customer;
 pub mod speaking;
 pub mod genpassword;
-
+pub mod getip;
 
 //Move to person.rs
 

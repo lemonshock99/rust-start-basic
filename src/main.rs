@@ -12,6 +12,7 @@ use hello_world::{
     person::Person,
     speaking::Speaking,
     genpassword::gen_password,
+    getip::getip,
 };
 
 fn main() {
@@ -246,7 +247,9 @@ fn main() {
     println!("Function with Closures 2 {}", y);
 
     let y = cal(10, 20, add);
-    println!("Function with Closures 3 {}", y);    
+    println!("Function with Closures 3 {}", y);
+
+    getip();
 
 }
 
