@@ -251,6 +251,51 @@ fn main() {
 
     getip();
 
+    // Ownership and Borrow ----- ***specific Heap memory
+    println!("====================================================");
+
+
+    let crabby_master = "Crabby Master".to_string();
+
+    // =====================
+    // let crabby_01 = crabby_master;
+    // println!("{}",crabby_01);
+    // println!("{}",crabby_master); // error because crabby_01 got Ownership
+
+    let crabby_02 = crabby_master.clone();
+    println!("{} was Clone by Crabby02",crabby_02);
+    println!("I'm {} OG",crabby_master);
+
+
+    let crabby_03 = &crabby_master;
+    println!("{} was Borrowing by Crabby03",crabby_03);
+    println!("I'm {} OG",crabby_master);
+    
+    
+    // =====================
+
+    let mut crabby_master_mut = "Crabby Master mutable".to_string();
+    let crabby_04 = &mut crabby_master_mut;
+
+    // println!("{} was Borrowing by Crabby04",crabby_04);
+    // println!("I'm {}",crabby_master_mut);
+
+    *crabby_04 = "Crabby High Grand Master".to_string();
+    println!("Crabby04 change value to {}",crabby_04);
+    // println!("I'm {}",crabby_master_mut); // error bacause Ownership transfer to Crabby 04
+
+    crabby_04.push_str(" Elite");
+    println!("I'm {} ... crabby04", crabby_04);
+
+    println!("I'm Original {}",crabby_master_mut); // can execute bacause Crabby 04 finish ... memory was destroyed
+
+
+    
+    // =====================
+
+
+
+
 }
 
 
